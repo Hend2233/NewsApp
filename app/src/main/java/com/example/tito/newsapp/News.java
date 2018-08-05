@@ -4,14 +4,17 @@ public class News {
 
     private String ArticleTitle;
 
-    private String AuthorName;
+    private String SectionName;
 
     private String DateOfArticle;
 
-    public News(String articleTitle, String authorName, String dateOfArticle) {
+    private String Url;
+
+    public News(String articleTitle, String sectionName, String dateOfArticle, String url) {
         this.ArticleTitle = articleTitle;
-        this.AuthorName = authorName;
+        this.SectionName = sectionName;
         this.DateOfArticle = dateOfArticle;
+        this.Url = url;
     }
 
     public String getArticleTitle() {
@@ -22,7 +25,11 @@ public class News {
         return DateOfArticle;
     }
 
-    public String getAuthorName() {
-        return AuthorName;
+    public String getSectionName() {
+        return SectionName;
+    }
+
+    public String getUrl() {
+        return Url;
     }
 }
