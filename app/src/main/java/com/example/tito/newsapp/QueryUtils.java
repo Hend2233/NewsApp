@@ -17,7 +17,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class QueryUtils {
+
     private static final String LOG_TAG = QueryUtils.class.getSimpleName();
+
+    private static final int READ_TIME_OUT = 10000;
+
+    private static final int CONNECTION_TIME_OUT = 15000;
 
     public static List<News> fetchNewsData(String requestedUrl) {
         try{
@@ -61,8 +66,12 @@ public class QueryUtils {
                 String section = currentNews.getString("sectionName");
                 String  date = currentNews.getString("webPublicationDate");
                 String url = currentNews.getString("webUrl");
-
-                News nNews = new News(title, section, date, url);
+                JSONArray tags = currentNews.getJSONArray("tags");
+                String author = "";
+                if (tags.length() != 0) {
+                    author = tags.getJSONObject(0).getString("firstName");
+                }
+                News nNews = new News(title, section, date, author, url);
 
                 recentNews.add(nNews);
             }
@@ -83,12 +92,12 @@ public class QueryUtils {
         InputStream inputStream = null;
         try {
             urlConnection = (HttpURLConnection) url.openConnection();
-            urlConnection.setReadTimeout(10000);
-            urlConnection.setConnectTimeout(15000);
+            urlConnection.setReadTimeout(READ_TIME_OUT);
+            urlConnection.setConnectTimeout(CONNECTION_TIME_OUT);
             urlConnection.setRequestMethod("GET");
             urlConnection.connect();
 
-           if(urlConnection.getResponseCode() == 202) {
+           if(urlConnection.getResponseCode() == 200) {
                 inputStream = urlConnection.getInputStream();
                 jsonResponse = readFromStream(inputStream);
             }else {

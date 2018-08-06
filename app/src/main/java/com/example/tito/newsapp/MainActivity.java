@@ -2,7 +2,6 @@ package com.example.tito.newsapp;
 
 import android.app.AlertDialog;
 import android.app.LoaderManager;
-import android.app.Service;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -25,8 +24,9 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
     private static final int NEWS_LOADER_ID = 1;
     private NewsAdapter Adapter;
     private TextView EmptyStateTextView;
+    ListView listView;
     private static final String GUARDIAN_REQUEST_URL =
-            "https://content.guardianapis.com/search?q=debate&tag=politics/politics&from-date=2014-01-01&api-key=ad80fba8-0854-44c5-9525-51709949001c";
+            "https://content.guardianapis.com/search?q=debate&tag=politics/politics&show-tags=contributor&from-date=2014-01-01&api-key=ad80fba8-0854-44c5-9525-51709949001c";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,7 +39,9 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
 
         loaderManager.initLoader(NEWS_LOADER_ID, null,this);
 
-        ListView listView = findViewById(R.id.list);
+        listView = findViewById(R.id.list);
+
+        listView.setEmptyView(EmptyStateTextView);
 
         Adapter = new NewsAdapter(this, new ArrayList<News>());
 
@@ -72,6 +74,7 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
 
     @Override
     public void onLoadFinished(Loader<List<News>> loader, List<News> newsOfDay) {
+
         EmptyStateTextView.setText(R.string.empty_state_text_view);
         Adapter.clear();
         if (newsOfDay != null && !newsOfDay.isEmpty()){

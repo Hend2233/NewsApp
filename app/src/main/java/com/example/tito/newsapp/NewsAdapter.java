@@ -18,7 +18,7 @@ public class NewsAdapter extends ArrayAdapter<News> {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         if (convertView == null) {
-            convertView = LayoutInflater.from(getContext()).inflate(R.layout.list_of_news, parent, false);
+            convertView = LayoutInflater.from(getContext()).inflate(R.layout.news_list_item, parent, false);
         }
 
         News currentNews = getItem(position);
@@ -26,8 +26,11 @@ public class NewsAdapter extends ArrayAdapter<News> {
         TextView articleTitle = convertView.findViewById(R.id.articleTitle);
         articleTitle.setText(currentNews.getArticleTitle());
 
-        TextView authorName = convertView.findViewById(R.id.sectionName);
-        authorName.setText(currentNews.getSectionName());
+        TextView sectionName = convertView.findViewById(R.id.sectionName);
+        sectionName.setText(currentNews.getSectionName());
+
+        TextView authorName = convertView.findViewById(R.id.author_name);
+        authorName.setText(currentNews.getAuthorName());
 
         TextView articleDate = convertView.findViewById(R.id.articleDate);
         articleDate.setText(currentNews.getDateOfArticle());
