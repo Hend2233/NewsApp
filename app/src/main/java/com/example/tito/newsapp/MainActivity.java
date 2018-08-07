@@ -11,6 +11,8 @@ import android.net.NetworkInfo;
 import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
@@ -24,7 +26,7 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
     private static final int NEWS_LOADER_ID = 1;
     private NewsAdapter Adapter;
     private TextView EmptyStateTextView;
-    ListView listView;
+    private ListView listView;
     private static final String GUARDIAN_REQUEST_URL =
             "https://content.guardianapis.com/search?q=debate&tag=politics/politics&show-tags=contributor&from-date=2014-01-01&api-key=ad80fba8-0854-44c5-9525-51709949001c";
 
@@ -46,7 +48,6 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
         Adapter = new NewsAdapter(this, new ArrayList<News>());
 
         listView.setAdapter(Adapter);
-
 
         if(!isNetworkOnline()){
             buildDialog(MainActivity.this).show();
@@ -74,8 +75,11 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
 
     @Override
     public void onLoadFinished(Loader<List<News>> loader, List<News> newsOfDay) {
-
-        EmptyStateTextView.setText(R.string.empty_state_text_view);
+        if(!isNetworkOnline()){
+            buildDialog(MainActivity.this).show();
+        } else {
+            EmptyStateTextView.setText(R.string.empty_state_text_view);
+        }
         Adapter.clear();
         if (newsOfDay != null && !newsOfDay.isEmpty()){
             Adapter.addAll(newsOfDay);
@@ -121,5 +125,21 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
         });
 
         return builder;
+    }
+
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.news_menu, menu);
+
+        return true;
+    }
+
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+        if (id == R.id.menu_settings) {
+            Intent settingsIntent = new Intent(this, SettingsActivity.class);
+            startActivity(settingsIntent);
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 }

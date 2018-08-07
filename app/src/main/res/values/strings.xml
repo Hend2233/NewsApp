@@ -1,6 +1,7 @@
 <resources>
-    <string name="app_name">"News App "</string>
+    <string name="app_name">News App</string>
     <string name="read_more">Read more >></string>
     <string name="empty_state_text_view">No News found.\n Try again later</string>
-    <string name="no_internet_connection">NO Internet Connection!\n Please Check Your Connection</string>
+    <string name="settings_menu_item">settings</string>
+    <string name="news_settings">News Settings</string>
 </resources>
