@@ -2,13 +2,11 @@ package com.example.tito.newsapp;
 
 import android.app.AlertDialog;
 import android.app.LoaderManager;
-import android.content.Context;
-import android.content.DialogInterface;
-import android.content.Intent;
-import android.content.Loader;
+import android.content.*;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.Uri;
+import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -28,7 +26,7 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
     private TextView EmptyStateTextView;
     private ListView listView;
     private static final String GUARDIAN_REQUEST_URL =
-            "https://content.guardianapis.com/search?q=debate&tag=politics/politics&show-tags=contributor&from-date=2014-01-01&api-key=ad80fba8-0854-44c5-9525-51709949001c";
+            "https://content.guardianapis.com/search";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,6 +49,8 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
 
         if(!isNetworkOnline()){
             buildDialog(MainActivity.this).show();
+
+
         }
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -70,7 +70,30 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
 
     @Override
     public Loader<List<News>> onCreateLoader(int i, Bundle bundle) {
-        return new NewsLoader(this, GUARDIAN_REQUEST_URL);
+
+        SharedPreferences sharedPreferences =
+                PreferenceManager.getDefaultSharedPreferences(this);
+
+        String orderBySort = sharedPreferences.getString(
+                String.valueOf(R.string.list_of_sorts_title),
+                String.valueOf(R.string.list_of_sorts_title_key));
+
+        String orderByDate = sharedPreferences.getString(
+                String.valueOf(R.string.order_by_date_title_key),
+                String.valueOf(Integer.parseInt(getString(R.string.order_by_date_title_default))));
+
+        Uri baseUri = Uri.parse(GUARDIAN_REQUEST_URL);
+
+        Uri.Builder uriBuilder = baseUri.buildUpon();
+        // the last version of the URL
+        //?q=debate&tag=politics/politics&show-tags=contributor&from-date=2014-01-01&api-
+        // key=ad80fba8-0854-44c5-9525-51709949001c
+        uriBuilder.appendQueryParameter("debate&tag", orderBySort);
+        uriBuilder.appendQueryParameter("show-tags","contributor");
+        uriBuilder.appendQueryParameter("from-date", orderByDate);
+        uriBuilder.appendQueryParameter("key","ad80fba8-0854-44c5-9525-51709949001c");
+
+        return new NewsLoader(this, uriBuilder.toString());
     }
 
     @Override

@@ -2,6 +2,34 @@
     <string name="app_name">News App</string>
     <string name="read_more">Read more >></string>
     <string name="empty_state_text_view">No News found.\n Try again later</string>
+
     <string name="settings_menu_item">settings</string>
     <string name="news_settings">News Settings</string>
+    
+    <string name="order_by_date_title">Order by date</string>
+    <string name="order_by_date_title_key" translatable="false">Order_by_date</string>
+    <string name="order_by_date_title_default" translatable="false">0</string>
+    
+    <string name="list_of_sorts_title">Choose by sort</string>
+    <string name="list_of_sorts_title_key" translatable="false">list_of_sorts</string>
+    <string name="list_of_sorts_title_default" translatable="false">@string/sort_politics_value</string>
+    
+    <string name="sort_football">Football</string>
+    <string name="sort_football_value" translatable="false">Football</string>
+
+    <string name="sort_society">Society</string>
+    <string name="sort_society_value">Society</string>
+
+    <string name="sort_world_news">World news</string>
+    <string name="sort_world_news_value">World news</string>
+
+    <string name="sort_business">Business</string>
+    <string name="sort_business_value">Business</string>
+
+    <string name="sort_education">Education</string>
+    <string name="sort_education_value">Education</string>
+
+    <string name="sort_politics">Politics</string>
+    <string name="sort_politics_value">Politics</string>
+
 </resources>

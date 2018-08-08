@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="setting_news_order_by_labels">
+        <item>@string/sort_business</item>
+        <item>@string/sort_education</item>
+        <item>@string/sort_football</item>
+        <item>@string/sort_society</item>
+        <item>@string/sort_world_news</item>
+    </string-array>
+
+    <string-array name="setting_news_order_by_value">
+        <item>@string/sort_business_value</item>
+        <item>@string/sort_education_value</item>
+        <item>@string/sort_football_value</item>
+        <item>@string/sort_society_value</item>
+        <item>@string/sort_world_news_value</item>
+    </string-array>
+</resources>

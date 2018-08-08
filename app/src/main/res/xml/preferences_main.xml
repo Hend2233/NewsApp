@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen
+        xmlns:android="http://schemas.android.com/apk/res/android" xmlns:tools="http://schemas.android.com/tools"
+        android:title="@string/news_settings">
+
+    <ListPreference
+        android:defaultValue="@string/list_of_sorts_title"
+        android:entries="@array/setting_news_order_by_labels"
+        android:entryValues="@array/setting_news_order_by_value"
+        android:key="@string/list_of_sorts_title_key"
+        android:summary="Politics"
+        android:title="@string/list_of_sorts_title"/>
+
+    <EditTextPreference
+        android:defaultValue="@string/order_by_date_title_default"
+        android:inputType="date"
+        android:key="@string/order_by_date_title_key"
+        android:selectAllOnFocus="true"
+        android:summary="yyyy-mm-dd"
+        android:title="@string/order_by_date_title"/>
+
+</PreferenceScreen>

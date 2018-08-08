@@ -24,6 +24,8 @@ public class QueryUtils {
 
     private static final int CONNECTION_TIME_OUT = 15000;
 
+    private static final int OK_HTTP_CHECK = 200;
+
     public static List<News> fetchNewsData(String requestedUrl) {
         try{
             Thread.sleep(1000);
@@ -69,7 +71,7 @@ public class QueryUtils {
                 JSONArray tags = currentNews.getJSONArray("tags");
                 String author = "";
                 if (tags.length() != 0) {
-                    author = tags.getJSONObject(0).getString("firstName");
+                    author = tags.getJSONObject(0).getString("webTitle");
                 }
                 News nNews = new News(title, section, date, author, url);
 
@@ -97,7 +99,7 @@ public class QueryUtils {
             urlConnection.setRequestMethod("GET");
             urlConnection.connect();
 
-           if(urlConnection.getResponseCode() == 200) {
+           if(urlConnection.getResponseCode() == OK_HTTP_CHECK) {
                 inputStream = urlConnection.getInputStream();
                 jsonResponse = readFromStream(inputStream);
             }else {
