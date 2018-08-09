@@ -2,41 +2,41 @@ package com.example.tito.newsapp;
 
 public class News {
 
-    private String ArticleTitle;
+    private String mArticleTitle;
 
-    private String SectionName;
+    private String mSectionName;
 
-    private String DateOfArticle;
+    private String mDateOfArticle;
 
-    private String AuthorName;
+    private String mAuthorName;
 
-    private String Url;
+    private String mUrl;
 
     public News(String articleTitle, String sectionName, String dateOfArticle,String authorName, String url) {
-        this.ArticleTitle = articleTitle;
-        this.SectionName = sectionName;
-        this.DateOfArticle = dateOfArticle;
-        this.AuthorName = authorName;
-        this.Url = url;
+        this.mArticleTitle = articleTitle;
+        this.mSectionName = sectionName;
+        this.mDateOfArticle = dateOfArticle;
+        this.mAuthorName = authorName;
+        this.mUrl = url;
     }
 
     public String getArticleTitle() {
-        return ArticleTitle;
+        return mArticleTitle;
     }
 
     public String getDateOfArticle() {
-        return DateOfArticle;
+        return mDateOfArticle;
     }
 
     public String getSectionName() {
-        return SectionName;
+        return mSectionName;
     }
 
     public String getAuthorName() {
-        return AuthorName;
+        return mAuthorName;
     }
 
     public String getUrl() {
-        return Url;
+        return mUrl;
     }
 }

@@ -9,11 +9,11 @@ public class NewsLoader extends AsyncTaskLoader<List<News>> {
 
     private static final String LOG_TAG = NewsLoader.class.getName();
 
-    private String Url;
+    private String mUrl;
 
     public NewsLoader(Context context, String url) {
         super(context);
-        Url = url;
+        mUrl = url;
     }
 
     @Override
@@ -23,10 +23,10 @@ public class NewsLoader extends AsyncTaskLoader<List<News>> {
 
     @Override
     public List<News> loadInBackground() {
-        if (Url == null){
+        if (mUrl == null){
             return null;
         }
-        List<News> news = QueryUtils.fetchNewsData(Url);
+        List<News> news = QueryUtils.fetchNewsData(mUrl);
         return news;
     }
 }

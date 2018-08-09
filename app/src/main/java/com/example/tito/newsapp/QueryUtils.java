@@ -27,12 +27,6 @@ public class QueryUtils {
     private static final int OK_HTTP_CHECK = 200;
 
     public static List<News> fetchNewsData(String requestedUrl) {
-        try{
-            Thread.sleep(1000);
-        }catch (InterruptedException ie) {
-            Log.e(LOG_TAG, "loading time: problem with the loading", ie);
-        }
-
         URL url = createUrl(requestedUrl);
 
         String jsonResponse = null;
@@ -41,9 +35,7 @@ public class QueryUtils {
         }catch (IOException e) {
             Log.e(LOG_TAG, "fetchNewsData: problem with the HttpRequest", e);
         }
-
         List<News> recentNews = extractNewsFromJson(jsonResponse);
-
         return recentNews;
     }
     private static List<News> extractNewsFromJson(String jsonResponse) {
@@ -64,14 +56,14 @@ public class QueryUtils {
             for (int i = 0; i < currentNewsArticle.length(); i++) {
 
                 JSONObject currentNews = currentNewsArticle.getJSONObject(i);
-                String title = currentNews.getString("webTitle");
-                String section = currentNews.getString("sectionName");
-                String  date = currentNews.getString("webPublicationDate");
-                String url = currentNews.getString("webUrl");
+                String title = currentNews.optString("webTitle");
+                String section = currentNews.optString("sectionName");
+                String  date = currentNews.optString("webPublicationDate");
+                String url = currentNews.optString("webUrl");
                 JSONArray tags = currentNews.getJSONArray("tags");
                 String author = "";
                 if (tags.length() != 0) {
-                    author = tags.getJSONObject(0).getString("webTitle");
+                    author = tags.getJSONObject(0).optString("webTitle");
                 }
                 News nNews = new News(title, section, date, author, url);
 
@@ -83,7 +75,6 @@ public class QueryUtils {
         }
         return recentNews;
     }
-
     private static String makeHttpRequest(URL url) throws IOException {
         String jsonResponse = "";
 
@@ -117,7 +108,6 @@ public class QueryUtils {
         }
         return jsonResponse;
     }
-
     private static String readFromStream(InputStream inputStream) throws IOException {
         StringBuilder output = new StringBuilder();
         if (inputStream != null) {
@@ -131,7 +121,6 @@ public class QueryUtils {
         }
         return output.toString();
     }
-
     private static URL createUrl(String requestedUrl) {
         URL url = null;
             try {

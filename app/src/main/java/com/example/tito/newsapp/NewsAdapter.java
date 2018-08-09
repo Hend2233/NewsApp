@@ -20,7 +20,6 @@ public class NewsAdapter extends ArrayAdapter<News> {
         if (convertView == null) {
             convertView = LayoutInflater.from(getContext()).inflate(R.layout.news_list_item, parent, false);
         }
-
         News currentNews = getItem(position);
 
         TextView articleTitle = convertView.findViewById(R.id.articleTitle);
@@ -34,7 +33,6 @@ public class NewsAdapter extends ArrayAdapter<News> {
 
         TextView articleDate = convertView.findViewById(R.id.articleDate);
         articleDate.setText(currentNews.getDateOfArticle());
-
        return convertView;
     }
 

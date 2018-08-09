@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="size_for_article_title">35sp</dimen>
+    <dimen name="size_section_name">25sp</dimen>
+    <dimen name="size_15">15sp</dimen>
+</resources>
